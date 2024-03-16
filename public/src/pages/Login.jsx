@@ -22,6 +22,7 @@ function Login() {
    useEffect(()=>{
     const user = localStorage.getItem("chat-app-user");
    if(user){
+    console.log("coming inside login");
     navigate("/")
    }
    },[])

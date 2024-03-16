@@ -37,6 +37,7 @@ function Register() {
        })
       //  console.log("message sent successfully");
       //  console.log(data);
+      console.log("data status is ",data.status);
       if(data.status){ 
         localStorage.setItem("chat-app-user",JSON.stringify(data.user))
         // toast.success(`${data.user.username} created`,toastOptions)

@@ -76,7 +76,29 @@ module.exports.register =async (req,res,next) =>{
 
 module.exports.setAvatar =async (req,res,next)=>{
 console.log("coming in setAvatare");
-console.log("data is ",req.body);
+// console.log("data is ",req.body);
+try {
+    const userId = req.params;
+    // console.log("user id is ",userId);
+    const avatarImage = req.body.image;
+    console.log('avatar image is ',avatarImage);
+    // const 
+    
+} catch (error) {
+    next(error);
+    
 }
-// setAvatar
+
+}
+
+
+
+
+
+
+
+
+
+
+
 // setAvatar
