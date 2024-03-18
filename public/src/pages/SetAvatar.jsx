@@ -32,21 +32,23 @@ function SetAvatar() {
     if(selectedAvatar===undefined)
     toast.error("Please Select a profile Picture",toastOptions)
     else{
-      const user = localStorage.getItem("chat-app-user");
-      console.log("user is ",user);
-      const {data}  = await axios.post(`${setAvatarRoute}/:${user._id}`,{
-        image : avatars[selectedAvatar]
-      })
+      let user = localStorage.getItem("chat-app-user");
+      user = JSON.parse(user)
+      // console.log("user is ",user);
+      // console.log("user id=",user._id);
+      const {data}  = await axios.post(`${setAvatarRoute}/${user._id}`,{
+          avatarImage : avatars[selectedAvatar],
+          isAvatarImageSet : true
+      }) 
       if(data.isSet){
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
         localStorage.setItem("chat-app-user",JSON.stringify(user));
+          // console.log("user in setAvatar is ",user);
         navigate("/")
       }else{
         toast.error("can't set Profile",toastOptions);
-      }
-
-
+      } 
     }
   };
 
@@ -61,14 +63,14 @@ function SetAvatar() {
     data.push(buffer.toString("base64"));
     }
     setAvatars(data);
-    setIsLoading(false);
-    
-    
+    setIsLoading(false);    
   };
 
   useEffect(() => {
+    if(!localStorage.getItem("chat-app-user"))
+    navigate("/login")
+
     fetchData();
-    
   }, []);
  
 //  ''''''''''''''''''''''''''''''''''''
@@ -139,13 +141,13 @@ function SetAvatar() {
 
 export default SetAvatar;
 const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
+  /* height: 100vh; */
+  /* width: 100vw; */
   background: linear-gradient(to right, #94dcb7, #ddddaa);
   .avatars {
     /* height: 100vh; */
     display: flex;
-    margin-top: 10rem;
+    /* margin-top: 10rem; */
 
     /* align-items: center; */
     justify-content: center;

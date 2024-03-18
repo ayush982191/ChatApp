@@ -76,18 +76,47 @@ module.exports.register =async (req,res,next) =>{
 
 module.exports.setAvatar =async (req,res,next)=>{
 console.log("coming in setAvatare");
-// console.log("data is ",req.body);
 try {
-    const userId = req.params;
-    // console.log("user id is ",userId);
-    const avatarImage = req.body.image;
-    console.log('avatar image is ',avatarImage);
-    // const 
+    const userId = req.params._id;
+    const avatarImage=req.body.avatarImage;
+     
+    const updatedUser = await Users.findByIdAndUpdate(userId,{
+        isAvatarImageSet : true,
+        avatarImage
+    })
+
+
+    return res.json({
+        isSet : true,
+        image : avatarImage
+    })
     
 } catch (error) {
     next(error);
     
 }
+
+}
+
+module.exports.getAllUsers = async(req,res,next)=>{
+   try {
+    // console.log("coming inside getAlluser");
+    // console.log("req params is ",req.params);
+    const {_id} = req.params;
+    // const users = Users.find({_id : {$ne: req.params.id} }).select([
+    //     "email","username","avatarImage","_id"
+    // ])
+    const users = await Users.find({ _id: { $ne: _id } })
+    .select(["email", "username", "avatarImage", "_id"]);
+
+    return res.json({
+        users 
+    })
+    
+   } catch (error) {
+    next(error);
+    
+   }
 
 }
 

@@ -1,8 +1,39 @@
- *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
- }
- body{
-    font-family: "Poppins", sans-serif;
+/* Reset CSS */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+   font-family: "Poppins", sans-serif;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 4000px) {
+    p {
+       font-size: 30px;
    }
+   h1 {
+       font-size: 40px; 
+   }
+}
+@media screen and (max-width: 1200) {
+    p {
+       font-size: 30px; 
+   }
+   h1 {
+       font-size: 30px; 
+   }
+}
+
+@media screen and (max-width: 600px) {
+   
+   p {
+       font-size: 14px; 
+   }
+   h1 {
+       font-size: 20px; 
+   }
+}

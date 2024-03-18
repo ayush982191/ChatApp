@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Footer from "../components/Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
@@ -20,11 +20,16 @@ function Login() {
    
 
    useEffect(()=>{
-    const user = localStorage.getItem("chat-app-user");
-   if(user){
-    console.log("coming inside login");
+    let user = localStorage.getItem("chat-app-user");
+    user = JSON.parse(user)
+  //  if(user){
+  //   console.log("user =",user);
+  //   console.log("coming inside login");
+  //   navigate("/")
+  //  }
+  if(user){
     navigate("/")
-   }
+  }
    },[])
   
   const handleSubmit = async (e) => {

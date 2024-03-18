@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios"
 import { registerRoute } from "../utils/apiRoutes";
-
+import Robot from "../assets/robot.gif"
  
 function Register() {
   const [values, setValues] = useState({
@@ -37,11 +37,11 @@ function Register() {
        })
       //  console.log("message sent successfully");
       //  console.log(data);
-      console.log("data status is ",data.status);
+      console.log("data status is ");
       if(data.status){ 
         localStorage.setItem("chat-app-user",JSON.stringify(data.user))
         // toast.success(`${data.user.username} created`,toastOptions)
-       navigate("/login")
+       navigate("/setAvatar")
       }else{ 
         toast.error(data.msg,toastOptions)
       }
@@ -118,7 +118,7 @@ function Register() {
               md={6}
               style={{ display: "flex", justifyContent: "center" }}
             >
-              <img src="xyz" alt="errorr" />
+              <img src={Robot} alt="errorr" />
             </Grid>
             <Grid
               item
