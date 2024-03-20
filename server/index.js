@@ -13,7 +13,7 @@ app.use(express.json());
 
 
  
-console.log("MONGO_URL=",process.env.MONGO_URL);
+// console.log("MONGO_URL=",process.env.MONGO_URL);
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>console.log("connected"))
 .catch((error)=>console.log("error in mongo connection"))
@@ -25,7 +25,7 @@ app.use("/api/messages",messageRoute);
 
 const port = process.env.PORT || 8000 ;
 
-console.log('PORT=',process.env.PORT);
+// console.log('PORT=',process.env.PORT);
 
 const server=  app.listen(port,()=>console.log("Listning port ",port));
 
