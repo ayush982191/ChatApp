@@ -7,53 +7,49 @@ import Footer from "../components/Footer";
 import { Link, json, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"
+import axios from "axios";
 import { loginRoute } from "../utils/apiRoutes";
- 
-function Login() {
+import Robot from "../assets/robot.gif";
 
+function Login() {
   const [values, setValues] = useState({
     username: "",
-     password: "",
-   });
-   const navigate = useNavigate();
-   
+    password: "",
+  });
+  const navigate = useNavigate();
 
-   useEffect(()=>{
+  useEffect(() => {
     let user = localStorage.getItem("chat-app-user");
-    user = JSON.parse(user)
-  //  if(user){
-  //   console.log("user =",user);
-  //   console.log("coming inside login");
-  //   navigate("/")
-  //  }
-  if(user){
-    navigate("/")
-  }
-   },[])
-  
+    user = JSON.parse(user);
+    //  if(user){
+    //   console.log("user =",user);
+    //   console.log("coming inside login");
+    //   navigate("/")
+    //  }
+    if (user) {
+      navigate("/");
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(handleValidation(values)){
+    if (handleValidation(values)) {
       const { username, password } = values;
-      const {data} = await axios.post(loginRoute,{
+      const { data } = await axios.post(loginRoute, {
         username,
-         password,
-       })
+        password,
+      });
       //  console.log("message sent successfully");
       //  console.log(data);
-      if(data.status){ 
-        console.log("data is ",data);
-        console.log("user is ",data.user);
-        localStorage.setItem("chat-app-user",JSON.stringify(data.user))
+      if (data.status) {
+        // console.log("data is ", data);
+        // console.log("user is ", data.user);
+        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
         // toast.success(`${data.user.username} created`,toastOptions)
-       navigate("/")
-      }else{ 
-        toast.error(data.msg,toastOptions)
+        navigate("/");
+      } else {
+        toast.error(data.msg, toastOptions);
       }
-
-      
-
     }
     // alert("form sumbit")
   };
@@ -74,8 +70,7 @@ function Login() {
     if (password == "") {
       toast.error("password can not be empty", toastOptions);
       return false;
-    } 
-    
+    }
 
     return true;
 
@@ -106,7 +101,7 @@ function Login() {
               md={6}
               style={{ display: "flex", justifyContent: "center" }}
             >
-              <img src="xyz" alt="errorr" />
+              <img src={Robot} alt="errorr" />{" "}
             </Grid>
             <Grid
               item
@@ -122,14 +117,14 @@ function Login() {
                     name="username"
                     placeholder="username"
                   />
-                 
+
                   <input
                     type="password"
                     onChange={handleChange}
                     name="password"
                     placeholder="Enter Password"
                   />
-                  
+
                   <Button
                     style={{ backgroundColor: "#92e574", marginTop: ".5rem" }}
                     type="submit"
@@ -148,7 +143,7 @@ function Login() {
             <p>create an Account</p>
             <div>
               <Link
-                style={{ color: "black", textDecoration: "none" }}
+                style={{ color: "black", textDecoration: "none",border:"2px solid black",padding:".4rem",borderRadius:"10px" }}
                 to="/register"
               >
                 Register
@@ -179,9 +174,10 @@ const Container = styled.div`
   }
   background: linear-gradient(to right, #94dcb7, #ddddaa);
 
-  /* height: 100vh; */
+  /* height: 60vh; */
   .formWrapper {
     border: 5px solid #e9bf9f;
+    /* border:  5px solid black; */
     width: 50vw;
     border-radius: 20px;
     margin: 0 5vw;
