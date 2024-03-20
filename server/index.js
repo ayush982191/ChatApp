@@ -23,10 +23,10 @@ mongoose.connect(process.env.MONGO_URL)
 app.use("/api/auth",userRoutes);
 app.use("/api/messages",messageRoute);
 
-
+const port = process.env.PORT || 8000 ;
 
 console.log('PORT=',process.env.PORT);
-const port = process.env.PORT ;
+
 const server=  app.listen(port,()=>console.log("Listning port ",port));
 
 const io = socket(
@@ -42,14 +42,14 @@ global.onlineUsers = new Map();
 io.on("connection",(socket)=>{
     global.chatSocket = socket;
     socket.on("add-user",(userId)=>{
-        console.log("user id is ",userId);
+        // console.log("user id is ",userId);
         onlineUsers.set(userId,socket.id)
     })
     socket.on("send-msg",(data)=>{
-        console.log("to=",data.to," and message is ",data.msg);
+        // console.log("to=",data.to," and message is ",data.msg);
         const sendUserSocket = onlineUsers.get(data.to);
-        console.log("senduserSocket");
-        console.log(sendUserSocket);
+        // console.log("senduserSocket");
+        // console.log(sendUserSocket);
         if(sendUserSocket){
             socket.to(sendUserSocket).emit("msg-recieve",data.msg)
         }
