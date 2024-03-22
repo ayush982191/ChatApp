@@ -32,7 +32,7 @@ const server=  app.listen(port,()=>console.log("Listning port ",port));
 const io = socket(
     server,{
         cors : {
-            origin : "http://localhost:5173",
+            origin : "https://chat-app-pi-jade.vercel.app",
             credentials : true,
         }
     }
